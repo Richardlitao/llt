@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task4</title>
+    <style>
+        span {
+            display: inline-block; 
+            border: 1px solid black;
+            background-color: rgb(0, 255, 115);
+        }
+    </style>
+  </head>
+<body>
+
+    <input type="text" id="num">
+    <button id="left-in">左侧入</button>
+    <button id="right-in">右侧入</button>
+    <button id="left-out">左侧出</button>
+    <button id="right-out">右侧出</button>
+    <div id="queue"></div>
+
+<script type="text/javascript">
+
+
+
+function leftIn(queue) {
+    var num = document.getElementById("num").value;
+    var span = document.createElement("span")
+    span.innerHTML = num;
+    var spanList = queue.childNodes;
+    queue.insertBefore(span,spanList[0]);
+}
+
+
+function rightIn(queue) {
+    var num = document.getElementById("num").value;
+    var span = document.createElement("span")
+    span.innerHTML = num; 
+    queue.appendChild(span);
+}
+
+
+function leftOut(queue) {
+    var childs = queue.childNodes;
+    alert(childs[0].innerHTML);
+    queue.removeChild(childs[0]);
+}
+
+
+function rightOut(queue) {
+    var childs = queue.childNodes;
+    alert(childs[childs.length-1].innerHTML);
+    queue.removeChild(childs[childs.length-1]);
+}
+
+
+
+function init() {
+    var queue = document.getElementById("queue");
+    document.getElementById("left-in").onclick = function() {
+        leftIn(queue);
+    };
+    document.getElementById("right-in").onclick = function() {
+        rightIn(queue);
+    };
+    document.getElementById("left-out").onclick = function() {
+        leftOut(queue);
+    };
+    document.getElementById("right-out").onclick = function() {
+        rightOut(queue);
+    };
+    document.getElementById("queue").onclick = function( e ) {
+        var t = e.target;  
+        this.removeChild(t);
+    }
+}
+
+init();
+</script>
+</body>
+<html>
